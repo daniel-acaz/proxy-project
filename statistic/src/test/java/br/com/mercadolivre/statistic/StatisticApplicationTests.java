@@ -1,12 +1,13 @@
-package br.com.mercadolivre.proxy;
+package br.com.mercadolivre.statistic;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProxyApplicationTests {
+class StatisticApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
+
 }

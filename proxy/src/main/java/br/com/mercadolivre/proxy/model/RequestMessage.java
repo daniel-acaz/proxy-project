@@ -1,18 +1,17 @@
 package br.com.mercadolivre.proxy.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @Builder
 @ToString
-public class RequestMessage implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+public class RequestMessage {
 
-    private String id;
+    private String messageId;
     private LocalDateTime requestTime;
     private String originIp;
     private String targetPath;
