@@ -14,3 +14,12 @@ services:
       - "15672:15672"
       - "5672:5672"
     network_mode: "bridge"
+
+  mysqlsrv:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "MySql2019!"
+      MYSQL_DATABASE: "meli-proxy-db"
+    ports:
+      - "3306:3306"
+

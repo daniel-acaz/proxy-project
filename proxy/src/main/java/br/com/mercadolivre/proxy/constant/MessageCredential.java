@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MessageCredential {
 
-    EXCHANGE("exchange-proxy"), ROUTIN_KEY("direct-queue-proxy"), QUEUE("queue-proxy");
+    EXCHANGE("exchange-proxy"), ROUTING_KEY("direct-queue-proxy"), QUEUE("queue-proxy");
 
     private String value;
 }
