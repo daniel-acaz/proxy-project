@@ -21,26 +21,12 @@ public class RequestService {
     @Autowired
     private RedisTemplateRepository redisRepository;
 
-    public RequestEntity saveRequest(HttpServletRequest request) {
-
-        RequestEntity requestEntity = buildEntityByRequest(request);
+    public RequestEntity saveRequest(RequestEntity requestEntity) {
 
         requestEntity.setDefaultId();
 
         return requestRepository.save(requestEntity);
 
-    }
-
-    private RequestEntity buildEntityByRequest(HttpServletRequest request) {
-        String remoteAddr = request.getRemoteAddr();
-        String remotePath = request.getServletPath();
-
-        return RequestEntity.builder()
-                .originIp(remoteAddr)
-                .targetPath(remotePath)
-                .requestTime(LocalDateTime.now())
-                .expirationTime(30L)
-                .build();
     }
 
     public boolean isAllowed(HttpServletRequest request) {
