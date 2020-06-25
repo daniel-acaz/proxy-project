@@ -6,3 +6,11 @@ services:
     command: redis-server --requirepass Redis2019!
     ports:
       - "6379:6379"
+
+  rabbitmq1:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    network_mode: "bridge"

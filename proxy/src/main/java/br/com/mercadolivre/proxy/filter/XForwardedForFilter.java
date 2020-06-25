@@ -1,5 +1,8 @@
 package br.com.mercadolivre.proxy.filter;
 
+import br.com.mercadolivre.proxy.model.RequestEntity;
+import br.com.mercadolivre.proxy.service.ConverterService;
+import br.com.mercadolivre.proxy.service.MessageService;
 import br.com.mercadolivre.proxy.service.RequestService;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -15,6 +18,12 @@ public class XForwardedForFilter extends ZuulFilter {
 
     @Autowired
     private RequestService requestService;
+
+    @Autowired
+    private MessageService messageService;
+
+    @Autowired
+    private ConverterService converterService;
 
     @Override
     public String filterType() {
@@ -37,9 +46,16 @@ public class XForwardedForFilter extends ZuulFilter {
 
         HttpServletRequest request = ctx.getRequest();
 
-        if(requestService.isAllowed(request)) {
-            requestService.saveRequest(request);
+        RequestEntity entity = this.converterService.buildEntityByRequest(request);
+
+
+        boolean allowed = requestService.isAllowed(request);
+
+        if(allowed) {
+            requestService.saveRequest(entity);
         }
+
+        messageService.sendRequest(entity, allowed);
 
         return null;
     }
