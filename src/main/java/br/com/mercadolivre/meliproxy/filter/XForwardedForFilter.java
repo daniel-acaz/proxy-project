@@ -37,9 +37,9 @@ public class XForwardedForFilter extends ZuulFilter {
 
         HttpServletRequest request = ctx.getRequest();
 
-
-
-        requestService.saveRequest(request);
+        if(requestService.isAllowed(request)) {
+            requestService.saveRequest(request);
+        }
 
         return null;
     }
