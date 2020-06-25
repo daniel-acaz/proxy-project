@@ -1,7 +1,5 @@
 package br.com.mercadolivre.meliproxy.filter;
 
-import br.com.mercadolivre.meliproxy.model.RequestEntity;
-import br.com.mercadolivre.meliproxy.repository.RequestRepository;
 import br.com.mercadolivre.meliproxy.service.RequestService;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -10,14 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
 
 @Component
 @Slf4j
 public class XForwardedForFilter extends ZuulFilter {
 
     @Autowired
-    private RequestService service;
+    private RequestService requestService;
 
     @Override
     public String filterType() {
@@ -40,7 +37,9 @@ public class XForwardedForFilter extends ZuulFilter {
 
         HttpServletRequest request = ctx.getRequest();
 
-        service.saveRequest(request);
+
+
+        requestService.saveRequest(request);
 
         return null;
     }
