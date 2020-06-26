@@ -58,8 +58,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "MySql2019!"
       MYSQL_DATABASE: "meli-proxy-db"
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
     networks:
       - backend-networks
 
