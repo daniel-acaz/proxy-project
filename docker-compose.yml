@@ -1,19 +1,57 @@
 version: '3'
 
 services:
+  proxy:
+    container_name: proxy
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - rabbitmq
+      - redis
+    links:
+      - redis
+      - rabbitmq
+    networks:
+      - backend-networks
+
+  statistic:
+    container_name: statistic
+    build:
+      context: ./statistic
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      - rabbitmq
+      - mysqlsrv
+    links:
+      - mysqlsrv
+      - rabbitmq
+    networks:
+      - backend-networks
+
   redis:
-    image: redis
-    command: redis-server --requirepass Redis2019!
+    image: redis:latest
+    command: [ "redis-server", "--protected-mode", "no" ]
+    hostname: redis
     ports:
       - "6379:6379"
+    networks:
+      - backend-networks
 
-  rabbitmq1:
+  rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
     ports:
       - "15672:15672"
       - "5672:5672"
-    network_mode: "bridge"
+    networks:
+      - backend-networks
 
   mysqlsrv:
     image: mysql:5.7
@@ -22,4 +60,10 @@ services:
       MYSQL_DATABASE: "meli-proxy-db"
     ports:
       - "3306:3306"
+    networks:
+      - backend-networks
 
+
+networks:
+  backend-networks:
+    driver: bridge
