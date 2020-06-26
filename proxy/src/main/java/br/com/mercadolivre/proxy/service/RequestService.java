@@ -54,12 +54,12 @@ public class RequestService {
                 .filter(requestEntity -> requestEntity.getTargetPath().equals(targetPath))
                 .collect(Collectors.toSet());
 
-        if( originIps.size() == parameter.getLimitOrigin()
-                || targetPaths.size() == parameter.getLimitTarget()
-                || both.size() == parameter.getLimitBoth()) {
+        if( originIps.size() >= parameter.getLimitOrigin()
+                || targetPaths.size() >= parameter.getLimitTarget()
+                || both.size() >= parameter.getLimitBoth()) {
 
             log.error("isn't allowed");
-            throw  new ExceededRequestException();
+            throw new ExceededRequestException();
         }
 
         return true;

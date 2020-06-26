@@ -1,11 +1,13 @@
 spring:
   application:
     name: proxy
-    rabbitmq:
-      host: localhost
-      port: 5672
-      username: guest
-      password: guest
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+
 server:
   port: 8080
 
