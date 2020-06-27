@@ -1,0 +1,11 @@
+spring:
+
+  datasource:
+    url: jdbc:mysql://mysqlsrv/meli-proxy-db?useSSL=false
+    password: ${DATABASE_PASS}
+    username: ${DATABASE_USR}
+
+  rabbitmq:
+    host: rabbitmq
+    username: ${QUEUE_PASS}
+    password: ${QUEUE_USR}

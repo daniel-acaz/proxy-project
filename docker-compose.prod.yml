@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+
+  proxy:
+    container_name: proxy
+    environment:
+      PROFILE: "production"
+      QUEUE_PASS: "guest"
+      QUEUE_USR: "guest"
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - rabbitmq
+      - redis
+    links:
+      - redis
+      - rabbitmq
+    networks:
+      - backend-networks
+
+  statistic:
+    container_name: statistic
+    environment:
+      PROFILE: "production"
+      DATABASE_PASS: "MySql2019!"
+      DATABASE_USR: "root"
+      QUEUE_PASS: "guest"
+      QUEUE_USR: "guest"
+    build:
+      context: ./statistic
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      - rabbitmq
+      - mysqlsrv
+    links:
+      - mysqlsrv
+      - rabbitmq
+    networks:
+      - backend-networks
+
+  redis:
+    networks:
+      - backend-networks
+
+  rabbitmq:
+    networks:
+      - backend-networks
+
+  mysqlsrv:
+    networks:
+      - backend-networks
+
+networks:
+  backend-networks:
+    driver: bridge

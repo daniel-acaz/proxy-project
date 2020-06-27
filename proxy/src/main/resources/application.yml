@@ -2,11 +2,11 @@ spring:
   application:
     name: proxy
 
+  profiles:
+    active: ${PROFILE:development}
+
   rabbitmq:
-    host: rabbitmq
     port: 5672
-    username: guest
-    password: guest
 
 server:
   port: 8080

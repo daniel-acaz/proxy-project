@@ -13,21 +13,39 @@ Controlamos o límite máximo de requizições por:
 Todos os límites são parametrizaveis, bem como também o tempo de expiração 
 das requests.
 
-## Requisitos para todar o projeto
+### Requisitos para todar o projeto
 ````
+Maven 3.6.0
+Java version 8
 Docker version 19.03.8
 Git version 2.19.0
 ````
 
-## Instalação do Projeto
+### Instalação do Projeto
 
-```
+```bash
 $ git clone https://github.com/DanielAcaz/meli-proxy.git
 $ cd meli-proxy
-$ docker compose-up --build
- 
- ...go to drink a coffe  
+
+# Para subir a infraestrutura no docker e testar os microsserviços pela IDE 
+
+$ docker-compose up --build  
+
+# Para subir todas as aplicações e infraestrutura no docker
+
+$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build
+$ ...go have a coffe  
+
 ```
+### Atenção!
+Os endereços de portas a seguir precisam estar disponíveis no seus sistema:
+
+* 8080
+* 8081
+* 13306
+* 15672
+* 5672
+* 6379
 
 ## Arquitetura do Projeto
 
