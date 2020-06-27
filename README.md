@@ -13,6 +13,22 @@ Controlamos o límite máximo de requizições por:
 Todos os límites são parametrizaveis, bem como também o tempo de expiração 
 das requests.
 
+### Sumário
+
+- [Startup do Projeto](#startup-do-Projeto)
+
+    - [Requisitos para todar o projeto](#requisitos-para-todar-o-projeto)
+
+    - [Instalação do Projeto](#instalação-do-projeto)
+
+    - [Atenção!](#atenção)
+
+- [Arquitetura do Projeto](#arquitetura-do-projeto)
+
+- [Endpoints do Projeto](#endpoints-do-projeto)
+
+## Startup do Projeto
+
 ### Requisitos para todar o projeto
 ````
 Maven 3.6.0
@@ -89,4 +105,39 @@ Abaixo existe a imagem da arquitetura descrita nos tópicos acima, para um melho
     <img src="./img/meli-proxy.png" alt="Arquitetura">
 </p>  
 
+## Endpoints do Projeto
+
+##### Microsserviço Proxy
+
+ - Documentação no swager
+ ```bash
+ curl GET http://localhost:8080/swagger-ui.html
+ ```
+ - Acessar um domínio do Mercado Livre
+ ```bash
+  curl GET http://localhost:8080/api/{mercado livre domain}
+  ```
+ - Ler os parâmetros de limites das requests:
+ ```bash
+ curl GET http://localhost:8080/parameters
+ ```
+ - Atualizar os parâmetros de limites das requests
+ ```bash
+ curl PUT -H "Content-Type: application/json" -d '{ "limitOrigin": 60, "limitTarget": 30, "limitBoth": 5, "expirationTime": 10 }' http://localhost:8080/parameters 
+ ```
+
+ ##### Microsserviço Statistic
  
+ - Documentação no swager
+  ```bash
+  curl GET http://localhost:8081/swagger-ui.html
+  ```
+  - Ler todas as requests:
+  ```bash
+  curl GET http://localhost:8081/requests/all
+  ```
+  
+  - Ler os atributos (ip e path) de maior quantidade de request:
+```bash
+curl GET http://localhost:8081/requests/most
+```
