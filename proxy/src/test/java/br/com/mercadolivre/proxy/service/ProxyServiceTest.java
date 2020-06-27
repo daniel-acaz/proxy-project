@@ -32,9 +32,6 @@ public class ProxyServiceTest {
     private ProxyService service;
 
     @Mock
-    private MessageService messageService;
-
-    @Mock
     private ConverterService converterService;
 
     @Mock
