@@ -1,22 +1,16 @@
 spring:
-
-  datasource:
-    password: MySql2019!
-    url: jdbc:mysql://mysqlsrv/meli-proxy-db?useSSL=false
-    username: root
+  profiles:
+    active: ${PROFILE:development}
 
   jpa:
     hibernate:
       ddl-auto: update
 
   application:
-    name: proxy
+    name: statistic
 
   rabbitmq:
-    host: rabbitmq
     port: 5672
-    username: guest
-    password: guest
 
 server:
   port: 8081

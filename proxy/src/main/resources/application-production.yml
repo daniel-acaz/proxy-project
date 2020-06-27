@@ -1,0 +1,9 @@
+spring:
+
+  rabbitmq:
+    host: rabbitmq
+    username: ${QUEUE_USR}
+    password: ${QUEUE_PASS}
+
+  redis:
+    host: redis

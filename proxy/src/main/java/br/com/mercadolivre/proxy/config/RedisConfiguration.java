@@ -1,6 +1,7 @@
 package br.com.mercadolivre.proxy.config;
 
 import br.com.mercadolivre.proxy.model.RequestEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -11,10 +12,13 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class RedisConfiguration {
 
+    @Value("${spring.redis.host}")
+    private String redisHost;
+
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
-        jedisConnectionFactory.setHostName("redis");
+        jedisConnectionFactory.setHostName(redisHost);
         return jedisConnectionFactory;
     }
 
