@@ -5,10 +5,7 @@ import br.com.mercadolivre.statistic.dto.MostFoundTypeDto;
 import br.com.mercadolivre.statistic.model.RequestMessage;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,7 +13,14 @@ public class RequestFunction {
 
     public Map<Long, RequestMessage> getAmountMap(List<Object[]> resultSet) {
 
-        return resultSet.stream()
+        if(resultSet.isEmpty()) return new HashMap<>();
+
+        resultSet.sort(Comparator.comparingLong(object -> (long) object[0]));
+        Collections.reverse(resultSet);
+
+        List<Object[]> objects = Collections.singletonList(resultSet.get(0));
+
+        return objects.stream()
                 .collect(Collectors.toMap(count -> (Long) count[0],
                         count -> RequestMessage.builder()
                                 .targetPath(count[1].toString())

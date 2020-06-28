@@ -13,7 +13,6 @@ server:
 
 zuul:
   prefix: /api
-  ignored-services: "*"
   routes:
     mercadolibre:
       path: /**
