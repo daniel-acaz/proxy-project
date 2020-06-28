@@ -1,0 +1,12 @@
+spring:
+
+  datasource:
+    url: jdbc:mysql://localhost:13306/meli-proxy-db?useSSL=false
+    password: MySql2019!
+    username: root
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest

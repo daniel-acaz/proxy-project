@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: ${PROFILE:development}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+  application:
+    name: statistic
+
+  rabbitmq:
+    port: 5672
+
+server:
+  port: 8081

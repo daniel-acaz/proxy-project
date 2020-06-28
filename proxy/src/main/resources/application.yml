@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: proxy
+
+  profiles:
+    active: ${PROFILE:development}
+
+  rabbitmq:
+    port: 5672
+
+server:
+  port: 8080
+
+zuul:
+  prefix: /api
+  routes:
+    mercadolibre:
+      path: /**
+      serviceId: https://api.mercadolibre.com
+      strip-prefix: false
