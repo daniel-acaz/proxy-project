@@ -76,8 +76,9 @@ public class RequestServiceTest {
                 .limitOrigin(10).build();
 
         when(parameterRepository.findById(MAIN.getId())).thenReturn(Optional.of(parameter));
-        when(redisRepository.findAllByKeyPart("0.0.0.0:00")).thenReturn(buildMockRequestEntitySet(2));
-        when(redisRepository.findAllByKeyPart("/api/sites/MLB")).thenReturn(buildMockRequestEntitySet(2));
+
+        when(redisRepository.findAllByKeyRegexPattern("0.0.0.0:00")).thenReturn(buildMockRequestEntitySet(2));
+        when(redisRepository.findAllByKeyRegexPattern("/api/sites/MLB")).thenReturn(buildMockRequestEntitySet(2));
 
         assertThat(service.requestIsAllowed(http), is(true));
 
@@ -98,8 +99,8 @@ public class RequestServiceTest {
                 .limitOrigin(10).build();
 
         when(parameterRepository.findById(MAIN.getId())).thenReturn(Optional.of(parameter));
-        when(redisRepository.findAllByKeyPart("0.0.0.0:00")).thenReturn(buildMockRequestEntitySet(12));
-        when(redisRepository.findAllByKeyPart("/api/sites/MLB")).thenReturn(buildMockRequestEntitySet(12));
+        when(redisRepository.findAllByKeyRegexPattern("0.0.0.0:00")).thenReturn(buildMockRequestEntitySet(12));
+        when(redisRepository.findAllByKeyRegexPattern("/api/sites/MLB")).thenReturn(buildMockRequestEntitySet(12));
 
         ExceededRequestException exception = assertThrows(ExceededRequestException.class,
                 () -> service.requestIsAllowed(http));

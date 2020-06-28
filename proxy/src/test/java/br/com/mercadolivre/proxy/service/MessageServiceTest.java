@@ -1,6 +1,8 @@
 package br.com.mercadolivre.proxy.service;
 
 import br.com.mercadolivre.proxy.model.RequestEntity;
+import br.com.mercadolivre.proxy.model.RequestMessage;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +16,9 @@ import java.time.LocalDateTime;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class MessageServiceTest {
@@ -46,6 +51,34 @@ public class MessageServiceTest {
         String message = this.service.sendRequest(mockRequest, true);
 
         assertThat(message, is(expected));
+    }
+
+    @Test
+    public void shouldNotSendRequestMessageSuccess() throws JsonProcessingException {
+
+        RequestEntity mockRequest = RequestEntity.builder()
+                .id("id")
+                .expirationTime(10L)
+                .originIp("0.0.0.0:00")
+                .requestTime(LocalDateTime.of(2020, 6, 26, 10, 12, 0,0))
+                .targetPath("/api/sites/MLB")
+                .build();
+
+        RequestMessage mockMessage = RequestMessage.builder()
+                .allowed(true)
+                .messageId(mockRequest.getId())
+                .originIp(mockRequest.getOriginIp())
+                .targetPath(mockRequest.getTargetPath())
+                .requestTime(mockRequest.getRequestTime())
+                .build();
+
+        mapper = spy(new ObjectMapper());
+        when(mapper.writeValueAsString(any())).thenThrow(JsonProcessingException.class);
+        service.setMapper(mapper);
+
+        String message = this.service.sendRequest(mockRequest, true);
+
+        assertThat(message, is(mockMessage.toString()));
     }
 
 }

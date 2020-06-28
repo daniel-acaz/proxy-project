@@ -1,5 +1,6 @@
 package br.com.mercadolivre.statistic.service;
 
+import br.com.mercadolivre.statistic.dto.MostFoundDto;
 import br.com.mercadolivre.statistic.dto.MostFoundTypeDto;
 import br.com.mercadolivre.statistic.model.RequestMessage;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +40,7 @@ public class RequestFunctionTest {
     }
 
     @Test
-    public void shouldReturnTheMostFound() {
+    public void shouldReturnTheMostTypeFound() {
 
         Map<Long, RequestMessage> resultQuery = new HashMap();
 
@@ -70,6 +71,38 @@ public class RequestFunctionTest {
 
         assertNull(mostFoundByMap.getType());
     }
+
+    @Test
+    public void shouldReturnTheMostFound() {
+
+        Map<Long, RequestMessage> resultQuery = new HashMap();
+
+        resultQuery.put(1000L, RequestMessage.builder().originIp("IP 1").targetPath("TARGET 1").build());
+        resultQuery.put(20L, RequestMessage.builder().originIp("IP 2").targetPath("TARGET 1").build());
+        resultQuery.put(10L, RequestMessage.builder().originIp("IP 1").targetPath("TARGET 2").build());
+        resultQuery.put(10000L, RequestMessage.builder().originIp("IP 2").targetPath("TARGET 2").build());
+        resultQuery.put(1000L, RequestMessage.builder().originIp("IP 3").targetPath("TARGET 3").build());
+
+        MostFoundDto dto = service.getMostFoundByMap(resultQuery);
+
+        assertThat(dto, hasProperty("targetPah", is("TARGET 2")));
+        assertThat(dto, hasProperty("originIp", is("IP 2")));
+        assertThat(dto, hasProperty("amount", is(10000L)));
+    }
+
+    @Test
+    public void shouldNotFoundTheMost() {
+
+        Map<Long, RequestMessage> resultQuery = new HashMap();
+
+        MostFoundDto dto = service.getMostFoundByMap(resultQuery);
+
+        assertNull(dto.getOriginIp());
+        assertNull(dto.getTargetPah());
+        assertNull(dto.getAmount());
+    }
+
+
 
 
 }
