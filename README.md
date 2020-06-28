@@ -23,7 +23,7 @@ das requests.
 
     - [Atenção!](#atenção)
 
-- [Tela de Parametrização](#tela-de-parametrizao)
+- [Tela de Parametrização](#tela-de-parametrização)
 
 - [Arquitetura do Projeto](#arquitetura-do-projeto)
 
