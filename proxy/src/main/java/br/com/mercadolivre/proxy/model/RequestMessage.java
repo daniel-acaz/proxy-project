@@ -4,11 +4,10 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
 @Builder
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class RequestMessage {
 
     private String messageId;

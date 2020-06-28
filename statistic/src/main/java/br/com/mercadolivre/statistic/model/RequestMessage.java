@@ -7,14 +7,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
+
 @Builder
-@ToString
 @Entity
 @Table(name = "request")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class RequestMessage implements Serializable {
 
 

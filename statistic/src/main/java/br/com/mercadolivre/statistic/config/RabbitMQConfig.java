@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 
 @Configuration
 @Slf4j
@@ -26,15 +27,25 @@ public class RabbitMQConfig {
 
     @RabbitListener(queues = "queue-proxy")
     public void receiveMessageFromTopic(Message message) {
+
+        this.saveRequestByMessage(message);
+
+    }
+
+    public Optional<RequestMessage> saveRequestByMessage(Message message) {
+
         String requestMessage = new String(message.getBody());
 
         try {
             RequestMessage request = convertMessageAsObject(requestMessage);
             log.info("BODY MESSAGE: {}", requestMessage);
-            repository.save(request);
+            return Optional.of(repository.save(request));
         } catch (MessageConversionException e) {
             log.info("Cannot convert message: {}", requestMessage, e.getMessage());
         }
+
+        return Optional.empty();
+
     }
 
     private RequestMessage convertMessageAsObject(String requestMessage) {

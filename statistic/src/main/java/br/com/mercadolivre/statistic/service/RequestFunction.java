@@ -32,7 +32,8 @@ public class RequestFunction {
                 Collectors.toMap(
                         type -> type,
                         type -> resultQuery.entrySet().stream()
-                                .filter(entry -> entry.getValue().getOriginIp().equals(type))
+                                .filter(entry -> type.equals(entry.getValue().getOriginIp()) ||
+                                        type.equals(entry.getValue().getTargetPath()))
                                 .map(Map.Entry::getKey)
                                 .reduce(Long::sum).orElse(0L)
                     )

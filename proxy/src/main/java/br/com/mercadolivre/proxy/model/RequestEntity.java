@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class RequestEntity {
 
     private String id;

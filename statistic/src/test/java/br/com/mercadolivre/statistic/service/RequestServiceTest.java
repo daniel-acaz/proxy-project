@@ -11,10 +11,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
@@ -29,6 +30,29 @@ public class RequestServiceTest {
 
     @Mock
     private RequestFunction function;
+
+    @Test
+    public void shouldReturnAllRequests() {
+
+        when(repository.findAll()).thenReturn(
+                Arrays.asList(
+                        RequestMessage.builder().allowed(true).messageId("messageId")
+                                .requestTime(LocalDateTime.now()).build(),
+                        RequestMessage.builder().allowed(true).messageId("messageId")
+                                .requestTime(LocalDateTime.now()).build(),
+                        RequestMessage.builder().allowed(true).messageId("messageId")
+                                .requestTime(LocalDateTime.of(2020, 6, 26, 0,0, 0, 0)).build()
+                )
+        );
+
+        List<RequestMessage> all = service.findAll();
+
+        assertThat(all, hasSize(3));
+        assertThat(all.get(0), hasProperty("allowed", is(true)));
+        assertThat(all.get(1), hasProperty("messageId", is("messageId")));
+        assertThat(all.get(2), hasProperty("requestTime", is(LocalDateTime.of(2020, 6, 26, 0,0, 0, 0))));
+
+    }
 
     @Test
     public void shouldGetStatisticAboutAmount() {

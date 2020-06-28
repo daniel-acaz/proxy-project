@@ -37,6 +37,9 @@ public class ProxyServiceTest {
     @Mock
     private RequestService requestService;
 
+    @Mock
+    private MessageService messageService;
+
     @BeforeAll
     public static void setUp() {
         CounterFactory.initialize(new EmptyCounterFactory());

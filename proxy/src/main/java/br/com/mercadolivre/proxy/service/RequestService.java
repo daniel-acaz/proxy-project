@@ -12,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static br.com.mercadolivre.proxy.constant.ParameterId.MAIN;
 
@@ -46,9 +44,9 @@ public class RequestService {
         RequestParameter parameter = parameterRepository.findById(MAIN.getId())
                 .orElseThrow(ParameterNotFoundException::new);
 
-        Set<RequestEntity> originIps = redisRepository.findAllByKeyPart(originIp);
+        Set<RequestEntity> originIps = redisRepository.findAllByKeyRegexPattern(originIp);
 
-        Set<RequestEntity> targetPaths = redisRepository.findAllByKeyPart(targetPath);
+        Set<RequestEntity> targetPaths = redisRepository.findAllByKeyRegexPattern(targetPath);
 
         Set<RequestEntity> both = originIps.stream()
                 .filter(requestEntity -> requestEntity.getTargetPath().equals(targetPath))

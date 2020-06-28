@@ -21,8 +21,8 @@ public class RedisTemplateRepository {
         this.template = template;
     }
 
-    public Set<RequestEntity> findAllByKeyPart(String keyPart) {
-        String pattern = "*" + keyPart + "*";
+    public Set<RequestEntity> findAllByKeyRegexPattern(String key) {
+        String pattern = "*" + key + "*";
         Set<String> keys = Objects.requireNonNull(this.template.keys(pattern)).stream()
                 .filter(k -> !k.contains("phantom"))
                 .collect(Collectors.toSet());
