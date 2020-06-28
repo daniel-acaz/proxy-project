@@ -22,6 +22,7 @@ public class ParameterController {
     @Autowired
     private ParameterService service;
 
+    @CrossOrigin(origins = "*")
     @PutMapping(produces = APPLICATION_JSON_VALUE)
     @ApiResponses(
         @ApiResponse(code = 200, message = "Success", response = RequestParameter.class)
@@ -30,6 +31,7 @@ public class ParameterController {
         return ResponseEntity.ok(service.updateParameter(parameter));
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     @ApiResponses(
             {

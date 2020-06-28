@@ -58,6 +58,14 @@ services:
     networks:
       - backend-networks
 
+  frontend:
+    container_name: front-admin
+    build:
+      context: ./front-admin
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+
 networks:
   backend-networks:
     driver: bridge

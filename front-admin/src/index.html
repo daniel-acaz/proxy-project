@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Porxy Control Pane</title>
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="cards-most" id="cards">
+
+    <div class="card most-ip">
+        <lavel>ORIGIN IP</lavel>
+        <h4 id="ip">192.168.149</h4>
+        <p id="ipTimes">1240 times</p>
+    </div>
+    <div class="card most-target">
+        <lavel>TARGET ENDPOINT</lavel>
+        <h4 id="target">/sites/MLB/categories</h4>
+        <p id="targetTimes">1240 times</p>
+    </div>
+    <div class="card most-both">
+        <lavel>BOTH</lavel>
+        <h4 id="bothIp">192.168.149</h4>
+        <h4 id="bothTarget">/sites/MLB/categories</h4>
+        <p id="bothTimes">1240 times</p>
+    </div>
+
+</div>
+
+<div class="forms-proxy">
+
+    <div class="form-parameter">
+        <form>
+            <div class="form-input">
+                <label>IP Limit</label>
+                <input class="ip amount" type=number min="1" id="ipLimit">
+            </div>
+            <div class="form-input">
+                <label>Target Limit</label>
+                <input class="target-mount" type=number min="1" id="targetLimit">
+            </div>
+            <div class="form-input">
+                <label>Both Limit</label>
+                <input class="both-amount" type=number min="1" id="bothLimit">
+            </div>
+            <div class="form-input">
+                <label>Time Expiration (s)</label>
+                <input class="time-expiration" type=number min="1" id="timeExpiration">
+            </div>
+            <div class="submit-form">
+                <button type="submit" onclick="updateParameters()">Apply</button>
+            </div>
+        </form>
+    </div>
+    <div class="form-meli-test">
+        <div class="form-input">
+            <label>api/</label>
+            <input id="url" class="endpoint-meli" type=text min="1">
+        </div>
+
+        <div class="submit-form">
+            <button type="submit" id="submit">Send</button>
+        </div>
+
+        <div class="response">
+            <label  id="status"></label>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+<footer>
+    <script src="./js/scripts.js"></script>
+</footer>
+</html>
