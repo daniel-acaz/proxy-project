@@ -1,7 +1,6 @@
-# Meli Proxy 
+# Proxy 
 
-O projeto Meli Proxy tem como objetivo, mais do que fornecer um proxy das requisições 
-do Mercado Livre mas também controlar o fluxo dessas requizições e prover uma forma de 
+O projeto Proxy tem como objetivo, mais do que fornecer um proxy das requisições mas também controlar o fluxo dessas requizições e prover uma forma de 
 se tirar estatísticas e informações sobre todas as requisições. 
 
 Controlamos o limíte máximo de requisições por:
@@ -103,7 +102,7 @@ As aplicações que compõem o projeto são:
 
 O fluxo do projeto obedece a seguinte ordem dentro das aplicações:
 
-1. O client faz uma requisição para o domínio do Mercado Livre. O Proxy Microservice 
+1. O client faz uma requisição para um domínio expecífico. O Proxy Microservice 
 intercepta a requisição. A aplicação valida se a requisição não tem nenhuma das 
 regras de limíte excedidas. Caso não tenha, ele cria um registro no Redis e também envia 
 a request para o RabbitMQ. Caso tenha excedido, o proxy bloqueia a request e retorna o 
@@ -142,9 +141,9 @@ Abaixo existe a imagem da arquitetura descrita nos tópicos acima, para um melho
  ```bash
  curl GET http://localhost:8080/swagger-ui.html
  ```
- - Acessar um domínio do Mercado Livre
+ - Acessar um domínio 
  ```bash
-  curl GET http://localhost:8080/api/{mercado livre domain}
+  curl GET http://localhost:8080/api/{domain}
   ```
  - Ler os parâmetros de limites das requests:
  ```bash
