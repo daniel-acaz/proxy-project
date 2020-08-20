@@ -21,6 +21,6 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-EXPOSE 8080
+EXPOSE 8082
 
 ENTRYPOINT ["java","-cp","app:app/lib/*","br.com.mercadolivre.statistic.StatisticApplication"]

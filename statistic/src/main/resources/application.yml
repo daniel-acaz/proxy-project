@@ -16,4 +16,4 @@ spring:
     port: 5672
 
 server:
-  port: 8081
+  port: 8082
