@@ -5,9 +5,9 @@ se tirar estatísticas e informações sobre todas as requisições.
 
 Controlamos o limíte máximo de requisições por:
 
-* IP de origem
-* Path de destino
-* E ambos
+* IP de origem.
+* Path de destino.
+* E ambos.
 
 Todos os limítes são parametrizáveis, bem como também o tempo de expiração 
 das requests.
