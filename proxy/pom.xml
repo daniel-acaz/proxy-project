@@ -15,7 +15,7 @@
     <description>Application of Proxy from Meli Proxy Project</description>
 
     <properties>
-        <spring-cloud-netflix.version>2.2.3.RELEASE</spring-cloud-netflix.version>
+        <spring-cloud-netflix.version>2.2.5.RELEASE</spring-cloud-netflix.version>
     </properties>
 
     <dependencies>
